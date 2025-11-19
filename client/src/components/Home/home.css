@@ -1,0 +1,15 @@
+.product-img{
+    height: 220px;
+    object-fit: cover;
+}
+.product-descreption{
+    font-size: 0.85rem;
+    color: cadetblue;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.product-card :hover{
+    transform: translateY(-4px);
+    transition: all 0.25s ease-in-out;
+}
