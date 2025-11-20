@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function CheckoutPage() {
   const location = useLocation();
@@ -43,8 +44,63 @@ function CheckoutPage() {
     }
   };
 
+  const total = cartItem.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0
+  );
+  const fetchDirectBuy = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/product/${directProductId}`);
+      console.log("product", res);
+
+      setCartItem([
+        {
+          product: res.data,
+          quantity: directQuantity,
+        },
+      ]);
+    } catch (error) {
+      console.log("fetch direct buy", error);
+    }
+  };
+
+  const handlePlaceOrder = async () => {
+    for (let key in shipping) {
+      if (!shipping[key]) {
+        alert("please fill all field");
+        return;
+      }
+    }
+
+    const orderData = {
+      shippingInfo: shipping,
+      items: cartItem.map((item) => ({
+        productId: item.product._id,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
+      directBuy: directBuy,
+    };
+    try {
+      const res = await axios.post(`${baseUrl}/order`, orderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast("Order Placed successfully");
+      window.location.href = "success";
+    } catch (error) {
+      console.log(error);
+      toast("failed to order");
+    }
+  };
+
   useEffect(() => {
-    fetchCart();
+    if (directBuy) {
+      fetchDirectBuy();
+    } else {
+      fetchCart();
+    }
   }, []);
 
   return (
@@ -155,8 +211,28 @@ function CheckoutPage() {
         </div>
 
         {/* {*right section} */}
-
-        
+        <div className="col-lg-4">
+          <h5 className="fw-semibold mb-3">Order summary</h5>
+          <div className="d-flex justify-content-between mb-2">
+            <span>Subtotal</span>
+            <span>INR{total.toFixed(2)}</span>
+          </div>
+          <div className="d-flex justify-content-between mb-2">
+            <span>Shipping</span>
+            <span className="text-success">Free</span>
+          </div>
+          <hr />
+          <div className="d-flex justify-content-between mb-2">
+            <span className="fw-semibold">Total</span>
+            <span className="fw-semibold">INR{total.toFixed(2)}</span>
+          </div>
+          <button
+            className="btn btn-outline-dark w-100 rounded-3 py-2"
+            onClick={() => handlePlaceOrder()}
+          >
+            Place Order
+          </button>
+        </div>
       </div>
     </div>
   );

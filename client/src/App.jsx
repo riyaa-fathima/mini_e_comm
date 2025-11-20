@@ -14,6 +14,7 @@ import Orders from "./pages/Admin/Orders";
 import ManageProducts from "./pages/Admin/ManageProducts";
 import ProductDetails from "./pages/productDetails";
 import CheckoutPage from "./pages/CheckoutPage";
+import OrderSuccess from "./pages/OrderSuccess";
 
 function App() {
   return (
@@ -47,13 +48,27 @@ function App() {
           }
         />
 
-        <Route path="/checkout" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <CheckoutPage/>
-            </MainLayout>
-          </ProtectedRoute>
-        }/>
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <CheckoutPage />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/success"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <OrderSuccess />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route
           path="/admin/dashboard"

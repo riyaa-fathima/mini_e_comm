@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function CartPage() {
   const [cart, setCart] = useState(null);
   const cartItems = cart?.items;
+  const navigate = useNavigate();
 
   const baseUrl = import.meta.env.VITE_API_URL;
   const user = JSON.parse(localStorage.getItem("user"));
@@ -150,7 +151,7 @@ function CartPage() {
             <span className="fw-semibold">Total</span>
             <span className="fw-bold">₹{total.toFixed(2)}</span>
           </div>
-          <button className="btn btn-dark w-100 rounded-2">
+          <button className="btn btn-dark w-100 rounded-2" onClick={()=>navigate("/checkout")}>
             Proceed to checkout
           </button>
         </div>
