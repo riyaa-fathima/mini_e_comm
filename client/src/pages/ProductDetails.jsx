@@ -98,7 +98,7 @@ function ProductDetails() {
             onClick={() =>
               navigate("/checkout", {
                 state: {
-                  productId: product.id,
+                  productId: product._id,
                   quantity: qty,
                   directBuy: true,
                 },
