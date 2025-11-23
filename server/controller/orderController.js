@@ -16,7 +16,7 @@ exports.createOrder = async (req, res) => {
     }));
     const totalAmount = items.reduce((sum, i) => {
       const product = products.find(
-        (p) => p._id.toString() === items.productId
+        (p) => p._id.toString() === i.productId
       );
       return sum + (product?.price || 0) * i.quantity;
     }, 0);
@@ -37,5 +37,19 @@ exports.createOrder = async (req, res) => {
     res
       .status(500)
       .json({ message: "Failed to create order", error: error.message });
+  }
+};
+
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate("user", "name email")
+      .populate("items.product", "name price image")
+      .sort({ CreatedAt: -1 });
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching all orders", error);
+    res.status(500).json({ message: "Failed to fetch orders" });
   }
 };
