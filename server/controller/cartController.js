@@ -7,7 +7,7 @@ exports.getCart = async (req, res) => {
       "items.product"
     );
     if (!cart) {
-      return res.status(404).json({ message: "Cart Empty" });
+      return res.json({ items: [] });
     }
     res.json(cart);
   } catch (error) {
@@ -79,7 +79,7 @@ exports.updateCart = async (req, res) => {
       return res.status(404).json({ message: "Cart not found" });
     }
 
-    const item = cart.items.find((i) => i.product.toString() === productId); 
+    const item = cart.items.find((i) => i.product.toString() === productId);
     if (!item) {
       return res.status(404).json({ message: "Product not found in cart" });
     }
@@ -87,17 +87,14 @@ exports.updateCart = async (req, res) => {
     item.quantity += quantity;
 
     if (item.quantity < 1) {
-      cart.items = cart.items.filter(
-        (i) => i.product.toString() !== productId
-      );
+      cart.items = cart.items.filter((i) => i.product.toString() !== productId);
     }
 
     await cart.save();
     await cart.populate("items.product");
     res.json(cart);
   } catch (error) {
-    console.log(error); 
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
-

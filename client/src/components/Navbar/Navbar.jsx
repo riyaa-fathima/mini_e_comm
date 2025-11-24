@@ -26,9 +26,9 @@ function Navbar() {
       console.log(error);
     }
   };
-  useEffect(() => {
-    fetchCartCount();
-  }, []);
+   useEffect(() => {
+    if (token) fetchCartCount();
+  }, [token]);
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -77,7 +77,7 @@ function Navbar() {
             </Link>
              {cartCount > 0 && (
                 <span
-                  className="position-abslute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                   style={{ fontSize: "10px" }}
                 >
                   {cartCount}
