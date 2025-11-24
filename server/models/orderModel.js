@@ -18,7 +18,7 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     shippingInfo: {
-      firstNmae: String,
+      firstName: String,
       lastName: String,
       email: String,
       address: String,

@@ -109,14 +109,14 @@ function CheckoutPage() {
       <div className="row g-4">
         <div className="col-lg-8">
           <div className="card border-0 shadow-sm rounded-4 p-4 mb-5">
-            <h5 className="fw-semibold mb-3">Shipping info</h5>
+            <h5 className="fw-bold mb-3">Shipping info</h5>
             <form className="row g-3">
               <div className="col-md-6">
                 <label className="form-label"> First Name :</label>
                 <input
                   type="text"
                   name="firstName"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.firstName}
                   onChange={handleChange}
                 />
@@ -126,7 +126,7 @@ function CheckoutPage() {
                 <input
                   type="text"
                   name="lastName"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.lastName}
                   onChange={handleChange}
                 />
@@ -137,7 +137,7 @@ function CheckoutPage() {
                 <input
                   type="text"
                   name="email"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.email}
                   onChange={handleChange}
                 />
@@ -147,7 +147,7 @@ function CheckoutPage() {
                 <input
                   type="text"
                   name="address"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.address}
                   onChange={handleChange}
                 />
@@ -157,7 +157,7 @@ function CheckoutPage() {
                 <input
                   type="text"
                   name="city"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.city}
                   onChange={handleChange}
                 />
@@ -167,7 +167,7 @@ function CheckoutPage() {
                 <input
                   type="number"
                   name="postalCode"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.postalCode}
                   onChange={handleChange}
                 />
@@ -177,7 +177,7 @@ function CheckoutPage() {
                 <input
                   type="number"
                   name="phone"
-                  className="form=control roundedd-3"
+                  className="form-control rounded-3"
                   value={shipping.phone}
                   onChange={handleChange}
                 />
