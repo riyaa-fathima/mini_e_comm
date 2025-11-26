@@ -12,7 +12,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import Orders from "./pages/Admin/Orders";
 import ManageProducts from "./pages/Admin/ManageProducts";
-import ProductDetails from "./pages/productDetails";
+import ProductDetails from "./pages/ProductDetails";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccess from "./pages/OrderSuccess";
 
